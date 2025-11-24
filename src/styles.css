@@ -1,0 +1,276 @@
+/* ===========================
+   SkyPass — LIGHT THEME UI
+   =========================== */
+
+/* Theme tokens */
+:root{
+  --bg: #f5f8ff;
+  --panel: #ffffff;
+  --border: #dce3f1;
+  --muted: #6b7280;
+  --text: #1e293b;
+  --accent: #0b74ff;
+  --accent-2: #3b82f6;
+  --shadow: rgba(15,23,42,0.10);
+  --shadow-strong: rgba(15,23,42,0.15);
+  --radius: 12px;
+  --gap: 14px;
+  --max-width: 1100px;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html,body,#root {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Root */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.topbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.topbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand */
+.brand { display:flex; align-items:center; gap:14px; }
+.logo { height: 54px; width:auto; object-fit:contain; }
+
+/* Buttons */
+.btn {
+  background: var(--accent);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: 0.15s ease;
+}
+.btn:hover { transform:translateY(-2px); }
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  box-shadow:none;
+}
+
+/* Container */
+.container {
+  max-width: var(--max-width);
+  margin: 22px auto;
+  padding: 0 18px 30px;
+  flex:1;
+}
+
+/* -------------------------
+   HERO BANNER
+   ------------------------- */
+
+/* hero-banner will get background-image from React inline style (App.jsx) */
+.hero-banner {
+  width: 100%;
+  height: 220px;
+  border-radius: 14px;
+  margin: 18px 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  position: relative;      /* create stacking context */
+  z-index: 0;              /* base */
+  overflow: hidden;
+}
+
+/* overlay limited to hero only (z-index set so it doesn't dim entire page) */
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;              /* sits above the image but below hero content */
+  pointer-events: none;    /* allow clicks on content */
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
+}
+
+/* hero content sits above the overlay */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 28px 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-content h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+.hero-content p {
+  margin-top: 6px;
+  opacity: 0.95;
+  font-size: 15px;
+}
+.hero-plane {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  z-index: 3;
+  background: rgba(255,255,255,0.92);
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Search */
+.search {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.search .field {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+.search label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.search input, .search select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* Alert */
+.alert {
+  background: #fffbeb;
+  border-left: 4px solid #facc15;
+  padding: 10px 12px;
+  color: #854d0e;
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+/* Grid/Sidebar/List etc */
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+.sidebar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: var(--radius);
+  position: sticky;
+  top: 90px;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.list { display: grid; gap: 14px; }
+
+.flight-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: var(--radius);
+  transition: 0.15s ease;
+  box-shadow: 0 3px 6px var(--shadow);
+}
+.flight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(--shadow-strong);
+}
+
+.flight-left { min-width: 80px; }
+.flight-left .airline { font-weight: 600; }
+.flight-left .flightno { color: var(--muted); font-size: 13px; }
+
+.flight-main { flex: 1; }
+.flight-main .route { font-size: 16px; font-weight: 700; }
+.flight-main .meta { color: var(--muted); font-size: 13px; }
+
+.flight-price { text-align: right; min-width: 120px; }
+.flight-price .amount { font-size: 20px; font-weight: 800; }
+.flight-price .sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+.selected input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.center {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+}
+
+.footer {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .grid { grid-template-columns:1fr; }
+  .sidebar { order:2; position:static; }
+}
+@media (max-width:520px){
+  .logo { height:44px; }
+  .topbar-inner h1 { font-size:17px; }
+}
